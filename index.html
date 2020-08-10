@@ -20,6 +20,14 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+    function Title(props){
+      return(
+        <div>
+        <h1>{props.title}</h1>
+        <p>Edited{props.count}</p>
+        </div>
+      )
+    }
       class HotNews extends React.Component {
         constructor(props){
           super(props);
@@ -36,13 +44,16 @@
         delete(){
           alert("delete button clicked")
         }
+
         render(){
           const props = this.props;
+         
           const totalEditCount = this.state.totalEditCount;
           return(
             <div className="newsContainer">
               
-              <h1>{props.children}</h1>
+              <Title title={props.title} count={totalEditCount} />
+              <p>{props.children}</p>
               <div className="action">
               <button className="edit" onClick={()=>this.edit()}>Edit</button>
               <button className="delete" onClick={this.delete}>Delete</button>
@@ -55,8 +66,8 @@
       }
       ReactDOM.render(
         <div className="container">
-        <HotNews>Mustafiz is a good boy.</HotNews>
-        <HotNews>Raya also good girl.</HotNews>
+        <HotNews title="news 1">Mustafiz Is a good boy.</HotNews>
+        <HotNews title="news 2">Raya also good girl.</HotNews>
         </div>,
         document.getElementById('root')
       );
